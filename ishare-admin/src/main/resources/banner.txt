@@ -1,0 +1,2 @@
+Application Version: ${ishare.version}
+Spring Boot Version: ${spring-boot.version}
