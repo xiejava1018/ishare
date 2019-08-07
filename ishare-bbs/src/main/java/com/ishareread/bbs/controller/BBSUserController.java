@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/bbsuser")
+@RequestMapping("/user")
 public class BBSUserController {
 	
 	@GetMapping("/login.html")

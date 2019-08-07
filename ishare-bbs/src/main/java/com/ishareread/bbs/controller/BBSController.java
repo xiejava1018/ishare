@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/")
 public class BBSController {
 	
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String showIndex() {
 		return "index";
 	}
