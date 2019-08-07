@@ -21,17 +21,17 @@ import com.ishareread.framework.web.controller.BaseController;
  */
 @Controller
 public class LoginController extends BaseController {
-	@GetMapping("/login")
+	@GetMapping("/system/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		// 如果是Ajax请求，返回Json字符串。
 		if (ServletUtils.isAjaxRequest(request)) {
 			return ServletUtils.renderString(response, "{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
 		}
 
-		return "login";
+		return "/system/login";
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/system/login")
 	@ResponseBody
 	public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);

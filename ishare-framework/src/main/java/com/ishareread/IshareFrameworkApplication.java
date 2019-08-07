@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * 启动程序
  */
+/*
 @EnableTransactionManagement
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class  })
 @MapperScan("com.ishareread.project.*.*.mapper")
+*/
 public class IshareFrameworkApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IshareFrameworkApplication.class, args);

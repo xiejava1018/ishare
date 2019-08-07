@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ishareread.framework.config.IshareConfig;
 import com.ishareread.framework.web.controller.BaseController;
@@ -27,7 +28,7 @@ public class IndexController extends BaseController
     private IshareConfig ishareConfig;
 
     // 系统首页
-    @GetMapping("/index")
+    @GetMapping("/system/index")
     public String index(ModelMap mmap)
     {
         // 取身份信息
@@ -37,7 +38,7 @@ public class IndexController extends BaseController
         mmap.put("menus", menus);
         mmap.put("user", user);
         mmap.put("copyrightYear", ishareConfig.getCopyrightYear());
-        return "index";
+        return "/system/index";
     }
 
     // 系统介绍
@@ -45,6 +46,6 @@ public class IndexController extends BaseController
     public String main(ModelMap mmap)
     {
         mmap.put("version", ishareConfig.getVersion());
-        return "main";
+        return "/system/main";
     }
 }
