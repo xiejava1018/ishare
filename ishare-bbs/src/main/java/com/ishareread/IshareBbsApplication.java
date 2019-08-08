@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class  })
-@MapperScan("com.ishareread.*.*.mapper")
+@MapperScan("com.ishareread.project.*.*.mapper")
 public class IshareBbsApplication {
 
 	public static void main(String[] args) {
