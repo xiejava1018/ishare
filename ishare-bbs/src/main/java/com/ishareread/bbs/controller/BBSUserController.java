@@ -1,7 +1,7 @@
 package com.ishareread.bbs.controller;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ishareread.bbs.user.service.IBBSUserService;
 import com.ishareread.common.annotation.Log;
 import com.ishareread.common.base.AjaxResult;
 import com.ishareread.common.enums.BusinessType;
 import com.ishareread.common.utils.StringUtils;
 import com.ishareread.framework.web.controller.BaseController;
 import com.ishareread.project.system.user.domain.User;
-import com.ishareread.project.system.user.service.IUserService;
 
 @Controller
 @RequestMapping("/user")
 public class BBSUserController extends BaseController {
+	
 	@Autowired
-	private IUserService userService;
+	@Qualifier("BBSUserServiceImpl")
+	private IBBSUserService userService;
 	
 	@GetMapping("/login.html")
 	public String showlogin() {
@@ -36,7 +38,6 @@ public class BBSUserController extends BaseController {
 	/**
 	 * 新增注册用户
 	 */
-	@Log(title = "用户管理", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@Transactional(rollbackFor = Exception.class)
 	@ResponseBody

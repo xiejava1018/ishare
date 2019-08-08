@@ -1,0 +1,106 @@
+package com.ishareread.bbs.user.service;
+
+
+import com.ishareread.project.system.user.domain.User;
+
+
+public interface IBBSUserService {
+
+
+	/**
+	 * 通过用户名查询用户
+	 * 
+	 * @param userName 用户名
+	 * @return 用户对象信息
+	 */
+	public User selectUserByLoginName(String userName);
+
+	/**
+	 * 通过手机号码查询用户
+	 * 
+	 * @param phoneNumber 手机号码
+	 * @return 用户对象信息
+	 */
+	public User selectUserByPhoneNumber(String phoneNumber);
+
+	/**
+	 * 通过邮箱查询用户
+	 * 
+	 * @param email 邮箱
+	 * @return 用户对象信息
+	 */
+	public User selectUserByEmail(String email);
+
+	/**
+	 * 通过用户ID查询用户
+	 * 
+	 * @param userId 用户ID
+	 * @return 用户对象信息
+	 */
+	public User selectUserById(Long userId);
+
+
+	/**
+	 * 保存用户信息
+	 * 
+	 * @param user 用户信息
+	 * @return 结果
+	 */
+	public int insertUser(User user);
+
+	/**
+	 * 保存用户信息
+	 * 
+	 * @param user 用户信息
+	 * @return 结果
+	 */
+	public int updateUser(User user);
+
+	/**
+	 * 修改用户详细信息
+	 * 
+	 * @param user 用户信息
+	 * @return 结果
+	 */
+	public int updateUserInfo(User user);
+
+	/**
+	 * 修改用户密码信息
+	 * 
+	 * @param user 用户信息
+	 * @return 结果
+	 */
+	public int resetUserPwd(User user);
+
+	/**
+	 * 校验用户名称是否唯一
+	 * 
+	 * @param loginName 登录名称
+	 * @return 结果
+	 */
+	public String checkLoginNameUnique(String loginName);
+
+	/**
+	 * 校验手机号码是否唯一
+	 *
+	 * @param user 用户信息
+	 * @return 结果
+	 */
+	public String checkPhoneUnique(User user);
+
+	/**
+	 * 校验email是否唯一
+	 *
+	 * @param user 用户信息
+	 * @return 结果
+	 */
+	public String checkEmailUnique(User user);
+
+	
+	/**
+	 * 根据用户登录名查询用户名名称
+	 * @param loginName 用户登录名
+	 * @return
+	 */
+	public String selectUserName(String loginName);
+}
