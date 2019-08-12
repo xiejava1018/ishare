@@ -25,10 +25,7 @@ public class BBSUserController extends BaseController {
 	@Qualifier("BBSUserServiceImpl")
 	private IBBSUserService userService;
 	
-	@GetMapping("/login.html")
-	public String showlogin() {
-		return "user/login";
-	}
+
 	
 	@GetMapping("/reg.html")
 	public String showreg() {

@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <title>登入</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../res/layui/css/layui.css">
-  <link rel="stylesheet" href="../../res/css/global.css">
-</head>
+<meta charset="utf-8">
+<head th:include="bbsinclude :: header"></head>
 <body>
 
+<!-- 
 <div class="fly-header layui-bg-black">
   <div class="layui-container">
     <a class="fly-logo" href="/">
@@ -29,7 +23,7 @@
     </ul>
     
     <ul class="layui-nav fly-nav-user">
-      <!-- 未登入的状态 -->
+      <!-- 未登入的状态  
       <li class="layui-nav-item">
         <a class="iconfont icon-touxiang layui-hide-xs" href="user/login.html"></a>
       </li>
@@ -48,7 +42,9 @@
     </ul>
   </div>
 </div>
-
+ -->
+ <div th:include="bbsinclude :: navigator"></div>
+ 
 <div class="layui-container fly-marginTop">
   <div class="fly-panel fly-panel-user" pad20>
     <div class="layui-tab layui-tab-brief" lay-filter="user">
@@ -59,17 +55,17 @@
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <div class="layui-form layui-form-pane">
-            <form method="post">
+            <form id="loginForm">
               <div class="layui-form-item">
-                <label for="L_email" class="layui-form-label">邮箱</label>
+                <label for="L_email" class="layui-form-label">用户名</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">密码</label>
                 <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="password" id="L_pass" name="password" required lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
@@ -78,11 +74,17 @@
                   <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid">
-                  <span style="color: #c00;">{{d.vercode}}</span>
+                  <span style="color: #c00;">
+                    <!-- 
+                    <a href="javascript:void(0);" title="点击更换验证码">
+						<img th:src="@{../captcha/captchaImage(type=${captchaType})}" class="imgcode" width="85%"/>
+					</a>
+					 -->
+				  </span>
                 </div>
               </div>
               <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="*" lay-submit>立即登录</button>
+                <button class="layui-btn" lay-filter="bbsLogin" lay-submit>立即登录</button>
                 <span style="padding-left:20px;">
                   <a href="forget.html">忘记密码？</a>
                 </span>
@@ -100,14 +102,8 @@
   </div>
 </div>
 
-<div class="fly-footer">
-  <p><a href="http://fly.layui.com/" target="_blank">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/" target="_blank">layui.com 出品</a></p>
-  <p>
-    <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
-    <a href="http://www.layui.com/template/fly/" target="_blank">获取Fly社区模版</a>
-    <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
-  </p>
-</div>
+<div th:include="include :: footer"></div>
+<div th:include="bbsinclude :: footer"></div>
 
 <script src="../../res/layui/layui.js"></script>
 <script>
@@ -125,6 +121,34 @@ layui.config({
 }).extend({
   fly: 'index'
 }).use('fly');
+
+
+	//表单
+	layui.use('form', function() {
+		var form = layui.form;
+		//监听提交
+		form.on('submit(bbsLogin)', function(data) {
+			//layer.msg(JSON.stringify(data.field));
+			$.post(ctx + "bbs/login", {
+				"username" : data.field.username,
+				"password" : data.field.password,
+				"rememberMe" : 0
+			}, function(data) {
+				alert(JSON.stringify(data));
+			});
+			return false;
+		});
+	});
+
+	function login() {
+		$.post(ctx + "bbs/login", {
+			"username" : $("input[name='username']").val(),
+			"password" : $("input[name='password']").val(),
+			"rememberMe" : 0
+		}, function(data) {
+			alert(JSON.stringify(data));
+		});
+	}
 </script>
 
 </body>
